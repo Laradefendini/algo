@@ -25,6 +25,9 @@ public class Graph {
         return vertices;
     }
 
+    public int getNbRed() {
+        return nbRed;
+    }
 
     /// ---- CONSTRUCTION GRAPH ---- ////
 
@@ -109,7 +112,10 @@ public class Graph {
         int size = 0;
 
         while (nbRed > 0) {
-            for (Vertex vertex : vertices) {
+
+            Iterator<Vertex> i = vertices.iterator();
+            while (i.hasNext()) {
+                Vertex vertex = i.next();
                 if (vertex.getColor() == Color.RED && !hasOutEdge(vertex))
                     removeVertex(vertex);
             }

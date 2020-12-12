@@ -24,6 +24,8 @@ public class Main {
         for(Vertex v : graph.getVertices()){
             System.out.println(v);
         }
+        System.out.println("nb red :" + graph.getNbRed());
+
 /*
         graph.removeVertex(v1);
         for(Vertex v : graph.getVertices()){
@@ -36,6 +38,7 @@ public class Main {
             System.out.println(v);
         }
         System.out.println("edges :" + graph.getEdges().size());
+        System.out.println("nb red :" + graph.getNbRed());
 
         System.out.println("\ndelete v3 :");
         graph.removeVertex(v3);
@@ -43,6 +46,8 @@ public class Main {
             System.out.println(v);
         }
         System.out.println("edges :" + graph.getEdges().size());
+        System.out.println("nb red :" + graph.getNbRed());
+
 
     }
 }
