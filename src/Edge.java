@@ -20,4 +20,9 @@ public class Edge {
     public Vertex getDestination() {
         return destination;
     }
+
+    @Override
+    public String toString() {
+        return "Edge " +  " , " + color;
+    }
 }
