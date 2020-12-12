@@ -21,8 +21,11 @@ public class Edge {
         return destination;
     }
 
+    public boolean isRed(){ return color == Color.RED;}
+
     @Override
     public String toString() {
         return "Edge " +  " , " + color;
     }
+
 }
