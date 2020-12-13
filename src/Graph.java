@@ -8,6 +8,10 @@ public class Graph {
     protected Map<Vertex, List<Vertex>> adjacencyList;
     private int nbRed = 0;
 
+    private int remainingWeight9 = 0;
+    private int remainingWeight8 = 0;
+    private int remainingWeight7 = 0;
+    private int remainingWeight6 = 0;
     private int remainingWeight5 = 0;
     private int remainingWeight4 = 0;
     private int remainingWeight3 = 0;
@@ -40,7 +44,7 @@ public class Graph {
 
         for (Vertex v : vertices) {
             for (int i = 0; i < nbVertex; i++) {
-                if(!v.equals(vertices.get(i))){
+                if (!v.equals(vertices.get(i))) {
                     boolean blueEdge = new Random().nextDouble() <= q;
                     Color colorEdge = Color.RED;
                     if (blueEdge)
@@ -142,6 +146,50 @@ public class Graph {
 
     }
 
+    public void removeVertex2(Vertex v) {
+
+        if (v.getColor() == Color.RED) { // On ne peut supprimer que les rouges
+
+            Iterator<Edge> i = edges.iterator();
+            while (i.hasNext()) {
+                Edge e = i.next();
+                if (e.getOrigin() == v) {
+                    changeDestinationColor(e);
+                    i.remove();
+                } else if (e.getDestination() == v) {
+                    Vertex origin = e.getOrigin();
+                    i.remove();
+                    adjacencyList.get(origin).remove(v);
+
+                    // adaptation
+                    decreaseWeight(origin);
+                    attributeWeight2(origin);
+
+                }
+            }
+
+            vertices.remove(v);
+
+            // ADAPTATIONS
+
+            for (Vertex vertex : adjacencyList.get(v)) {
+                decreaseWeight(vertex);
+                attributeWeight2(vertex);
+            }
+
+            decreaseWeight(v);
+            adjacencyList.remove(v);
+
+            if (v.getColor() == Color.RED) nbRed--;
+
+            System.out.println("Vertex removed : " + v.getId());
+
+        } else {
+            System.out.println("You can't delete a blue vertex.");
+        }
+
+    }
+
     private void changeDestinationColor(Edge e) {
         if (e.changeDestinationColor()) {
             if (e.getDestination().getColor() == Color.BLUE) {
@@ -161,6 +209,16 @@ public class Graph {
 
             Vertex vertex = i.next();
             attributeWeight(vertex);
+
+        }
+    }
+
+    public void attributeAllWeights2() {
+        Iterator<Vertex> i = vertices.iterator();
+        while (i.hasNext()) {
+
+            Vertex vertex = i.next();
+            attributeWeight2(vertex);
 
         }
     }
@@ -188,8 +246,59 @@ public class Graph {
         }
     }
 
+    public void attributeWeight2(Vertex vertex) {
+        if (vertex.isRed()) {
+            if (!hasOutEdge(vertex)) {
+                vertex.setWeight(9);
+                remainingWeight9++;
+            } else {
+                if (hasBtoB(vertex) && !hasBtoR(vertex) && hasBlueInEdge(vertex) && !hasRtoR(vertex)) {
+                    vertex.setWeight(8);
+                    remainingWeight8++;
+                } else if (hasBtoB(vertex) && !hasBtoR(vertex) && hasBlueInEdge(vertex)) {
+                    vertex.setWeight(7);
+                    remainingWeight7++;
+                } else if (!hasBtoR(vertex) && hasBlueInEdge(vertex) && !hasRtoR(vertex)) {
+                    vertex.setWeight(6);
+                    remainingWeight6++;
+                } else if (!hasBtoR(vertex) && hasBlueInEdge(vertex)) {
+                    vertex.setWeight(5);
+                    remainingWeight5++;
+                } else if (hasOnlyBlueInEdge(vertex) && hasOnlyRedOutEdge(vertex)) {
+                    vertex.setWeight(4);
+                    remainingWeight4++;
+                } else if (hasOnlyRedOutEdge(vertex) && !hasBlueOutEdge(vertex)) {
+                    vertex.setWeight(3);
+                    remainingWeight3++;
+                } else if (hasOnlyRedOutEdge(vertex)) {
+                    vertex.setWeight(2);
+                    remainingWeight2++;
+                } else {
+                    vertex.setWeight(1);
+                    remainingWeight1++;
+                }
+            }
+        } else {
+            vertex.setWeight(0);
+            remainingWeight0++;
+        }
+    }
+
+
     public void decreaseWeight(Vertex vertex) {
         switch (vertex.getWeight()) {
+            case 9:
+                remainingWeight9--;
+                break;
+            case 8:
+                remainingWeight8--;
+                break;
+            case 7:
+                remainingWeight7--;
+                break;
+            case 6:
+                remainingWeight6--;
+                break;
             case 5:
                 remainingWeight5--;
                 break;
@@ -213,6 +322,70 @@ public class Graph {
 
 
     //// ---- SEQUENCE ROUGE ---- ////
+
+    public int sequenceRouge2() {
+        int initialSize = vertices.size();
+
+        attributeAllWeights2();
+
+        while (nbRed > 0) {
+
+            Iterator<Vertex> i = vertices.iterator();
+            while (i.hasNext()) {
+                Vertex vertex = i.next();
+
+                if (remainingWeight9 != 0) {
+                    if (vertex.getWeight() == 9) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                } else if (remainingWeight8 != 0) {
+                    if (vertex.getWeight() == 8) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                }else if (remainingWeight7 != 0) {
+                    if (vertex.getWeight() == 7) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                }else if (remainingWeight6 != 0) {
+                    if (vertex.getWeight() == 6) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                }else if (remainingWeight5 != 0) {
+                    if (vertex.getWeight() == 5) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                }else if (remainingWeight4 != 0) {
+                    if (vertex.getWeight() == 4) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                } else if (remainingWeight3 != 0) {
+                    if (vertex.getWeight() == 3) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                } else if (remainingWeight2 != 0) {
+                    if (vertex.getWeight() == 2) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                } else if (remainingWeight1 != 0) {
+                    if (vertex.getWeight() == 1) {
+                        removeVertex2(vertex);
+                        break;
+                    }
+                } else if (remainingWeight0 == vertices.size()) {
+                    System.out.println("ok");
+                }
+            }
+        }
+        return initialSize - vertices.size();
+    }
 
     public int sequenceRouge() {
         int initialSize = vertices.size();
@@ -286,6 +459,31 @@ public class Graph {
         return false;
     }
 
+    public boolean hasBtoB(Vertex vertex) {
+        for (Edge edge : edges) {
+            if (edge.getOrigin() == vertex && !edge.isRed() && !edge.getDestination().isRed())
+                return true;
+        }
+        return false;
+    }
+
+    public boolean hasBtoR(Vertex vertex) {
+        for (Edge edge : edges) {
+            if (edge.getOrigin() == vertex && !edge.isRed() && edge.getDestination().isRed())
+                return true;
+        }
+        return false;
+    }
+
+    public boolean hasRtoR(Vertex vertex) {
+        for (Edge edge : edges) {
+            if (edge.getOrigin() == vertex && edge.isRed() && edge.getDestination().isRed())
+                return true;
+        }
+        return false;
+    }
+
+
     public boolean hasRedOutEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex && edge.isRed())
@@ -301,5 +499,22 @@ public class Graph {
         }
         return false;
     }
+
+    public boolean hasOnlyBlueInEdge(Vertex vertex) {
+        for (Edge edge : edges) {
+            if (edge.getDestination() == vertex && edge.isRed())
+                return false;
+        }
+        return true;
+    }
+
+    public boolean hasOnlyRedOutEdge(Vertex vertex) {
+        for (Edge edge : edges) {
+            if (edge.getOrigin() == vertex && !edge.isRed())
+                return false;
+        }
+        return true;
+    }
+
 
 }

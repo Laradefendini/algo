@@ -2,9 +2,9 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Graph graph = new Graph(5, 0.5, 0.5);
+        Graph graph = new Graph(1000, 0.2, 1);
 
-
+/*
         for(Vertex v : graph.getVertices()){
             System.out.println(v);
         }
@@ -15,8 +15,11 @@ public class Main {
         for (Edge e : graph.getEdges()) {
             System.out.println(e);
         }
+*/
 
-        graph.sequenceRouge();
+
+        //System.out.println(" RESULTAT SEQUENCE ROUGE V1 : " + graph.sequenceRouge());
+        System.out.println(" RESULTAT SEQUENCE ROUGE V2 : " + graph.sequenceRouge2());
 
 
 
