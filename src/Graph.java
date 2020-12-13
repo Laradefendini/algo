@@ -89,7 +89,7 @@ public class Graph {
 
             // On ajoute chacune des deux vertex dans la liste des voisins de l'autre
             adjacencyList.get(edge.getOrigin()).add(edge.getDestination());
-            adjacencyList.get(edge.getDestination()).add(edge.getOrigin());
+            //adjacencyList.get(edge.getDestination()).add(edge.getOrigin());
 
         //} else {
             //System.out.println("You can't add this edge because there would be too much edges.");
