@@ -1,7 +1,7 @@
 public class Main2 {
     public static void main(String[] args) {
 
-        Graph graph = new Graph(6, 3, 2);
+        GraphV2 graph = new GraphV2(6, 3, 2);
 
 
 //        System.out.println(graph.getEdges().size());
@@ -10,15 +10,15 @@ public class Main2 {
 //            System.out.println(v);
 //        }
 
-       // System.out.println("Taille de la séquence rouge :" + graph.sequenceRouge());
+        System.out.println("Taille de la séquence rouge :" + graph.sequenceRouge());
 
 
 
        // System.out.println("edges :" + graph.getEdges().size());
 
 
-        for (Edge e : graph.getEdges()) {
-            System.out.println(e);
-        }
+//        for (Edge e : graph.getEdges()) {
+//            System.out.println(e);
+//        }
     }
 }
