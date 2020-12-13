@@ -138,7 +138,7 @@ public class Graph {
 
             if (v.getColor() == Color.RED) nbRed--;
 
-            System.out.println("Vertex removed : " + v.getId());
+            //System.out.println("Vertex removed : " + v.getId());
 
         } else {
             System.out.println("You can't delete a blue vertex.");
