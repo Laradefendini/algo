@@ -1,24 +1,24 @@
 public class Main2 {
     public static void main(String[] args) {
 
-        Graph graph = new Graph(10, 0.4, 0.4);
+        Graph graph = new Graph(6, 3, 2);
 
 
-        System.out.println(graph.getEdges().size());
-        System.out.println(graph.getVertices().size());
+//        System.out.println(graph.getEdges().size());
+//        System.out.println(graph.getVertices().size());
 //        for(Vertex v : graph.getVertices()){
 //            System.out.println(v);
 //        }
 
-        System.out.println("Taille de la séquence rouge :" + graph.sequenceRouge());
+       // System.out.println("Taille de la séquence rouge :" + graph.sequenceRouge());
 
 
 
        // System.out.println("edges :" + graph.getEdges().size());
 
 
-//        for (Edge e : graph.getEdges()) {
-//            System.out.println(e);
-//        }
+        for (Edge e : graph.getEdges()) {
+            System.out.println(e);
+        }
     }
 }

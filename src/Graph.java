@@ -52,6 +52,32 @@ public class Graph {
         }
     }
 
+    public Graph(int nbVertex, int nbRondROuge, int nbFlecheBleu) {
+        edges = new LinkedList<>();
+        vertices = new LinkedList<>();
+        adjacencyList = new HashMap<>();
+
+        for (int i = 0; i < nbVertex; i++) {
+            if(i<nbRondROuge)
+                vertex = new Vertex(i, Color.RED);
+            else
+                vertex = new Vertex(i, Color.BLUE);
+            //this.vertices.add(vertex);
+            addVertex(vertex);
+        }
+
+        for (Vertex v : vertices) {
+            for (int i = 1; i < nbVertex; i++) {
+                if(i<nbFlecheBleu)
+                    edge = new Edge(v, vertices.get(i), Color.BLUE);
+                else
+                    edge = new Edge(v, vertices.get(i), Color.RED);
+
+                //this.edges.add(edge);
+                addEdge(edge);
+            }
+        }
+    }
 
 
 
