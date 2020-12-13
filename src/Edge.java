@@ -25,7 +25,7 @@ public class Edge {
 
     @Override
     public String toString() {
-        return "Edge " +  " , " + color;
+        return "Edge : origin " + origin +  " , destination "+ destination + " , color " + color;
     }
 
 }

@@ -2,7 +2,21 @@ public class Main {
     public static void main(String[] args) {
 
 
+        Graph graph = new Graph(5, 0.5, 0.5);
 
+
+        for(Vertex v : graph.getVertices()){
+            System.out.println(v);
+        }
+
+        System.out.println("edges :" + graph.getEdges().size());
+
+
+        for (Edge e : graph.getEdges()) {
+            System.out.println(e);
+        }
+
+        graph.sequenceRouge();
 
 
 

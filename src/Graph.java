@@ -22,6 +22,38 @@ public class Graph {
         adjacencyList = new HashMap<>();
     }
 
+    public Graph(int nbVertex, double p, double q) {
+
+
+        edges = new LinkedList<>();
+        vertices = new LinkedList<>();
+        adjacencyList = new HashMap<>();
+
+        for (int i = 0; i < nbVertex; i++) {
+            boolean redVertex = new Random().nextDouble() <= p;
+            Color colorVertex = Color.BLUE;
+            if (redVertex)
+                colorVertex = Color.RED;
+            //this.vertices.add(vertex);
+            addVertex(new Vertex(i, colorVertex));
+        }
+
+        for (Vertex v : vertices) {
+            for (int i = 0; i < nbVertex; i++) {
+                if(!v.equals(vertices.get(i))){
+                    boolean blueEdge = new Random().nextDouble() <= q;
+                    Color colorEdge = Color.RED;
+                    if (blueEdge)
+                        colorEdge = Color.BLUE;
+
+                    //this.edges.add(new Edge(v, vertices.get(i), colorEdge));
+                    addEdge(new Edge(v, vertices.get(i), colorEdge));
+                }
+            }
+
+
+        }
+    }
 
     //// ---- GETTERS ---- ////
 
@@ -50,22 +82,14 @@ public class Graph {
     }
 
     public void addEdge(Edge edge) {
-        //if (vertices.size() - edges.size() > 1 && !hasTwoAdjacents(edge.getOrigin()) && !hasTwoAdjacents(edge.getDestination())) {
 
             edges.add(edge);
 
-            // On ajoute chacune des deux vertex dans la liste des voisins de l'autre
+            // On ajoute la vertex d'arrivée dans les adjacents de la vertex de depart
             adjacencyList.get(edge.getOrigin()).add(edge.getDestination());
-            adjacencyList.get(edge.getDestination()).add(edge.getOrigin());
 
-        //} else {
-            //System.out.println("You can't add this edge because there would be too much edges.");
-        //}
     }
 
-    private boolean hasTwoAdjacents(Vertex vertex) {
-        return adjacencyList.get(vertex).size() == 2;
-    }
 
     public void addEdge(Vertex inVertex, Vertex outVertex, Color color) {
         addEdge(new Edge(inVertex, outVertex, color));
@@ -85,12 +109,15 @@ public class Graph {
                     changeDestinationColor(e);
                     i.remove();
                 } else if (e.getDestination() == v) {
+                    Vertex origin = e.getOrigin();
                     i.remove();
-                }
-            }
+                    adjacencyList.get(origin).remove(v);
 
-            for (Vertex vertex : adjacencyList.get(v)) {
-                adjacencyList.get(vertex).remove(v);
+                    // adaptation
+                    decreaseWeight(origin);
+                    attributeWeight(origin);
+
+                }
             }
 
             vertices.remove(v);
