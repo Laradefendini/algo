@@ -50,7 +50,7 @@ public class Graph {
     }
 
     public void addEdge(Edge edge) {
-        if (vertices.size() - edges.size() > 1 && !hasTwoAdjacents(edge.getOrigin()) && !hasTwoAdjacents(edge.getDestination())) {
+        //if (vertices.size() - edges.size() > 1 && !hasTwoAdjacents(edge.getOrigin()) && !hasTwoAdjacents(edge.getDestination())) {
 
             edges.add(edge);
 
@@ -58,9 +58,9 @@ public class Graph {
             adjacencyList.get(edge.getOrigin()).add(edge.getDestination());
             adjacencyList.get(edge.getDestination()).add(edge.getOrigin());
 
-        } else {
-            System.out.println("You can't add this edge because there would be too much edges.");
-        }
+        //} else {
+            //System.out.println("You can't add this edge because there would be too much edges.");
+        //}
     }
 
     private boolean hasTwoAdjacents(Vertex vertex) {

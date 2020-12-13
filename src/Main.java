@@ -1,7 +1,14 @@
 public class Main {
     public static void main(String[] args) {
 
+
+
+
+
+
+        /*
         Graph graph = new Graph();
+
 
         Vertex v1 = new Vertex(1, Color.RED);
         Vertex v2 = new Vertex(2, Color.BLUE);
@@ -79,7 +86,7 @@ public class Main {
         graph2.addEdge(e7b);
 
         System.out.println("Taille de la séquence rouge :" + graph2.sequenceRouge());
-
+*/
 
 
         /*
