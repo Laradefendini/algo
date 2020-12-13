@@ -5,6 +5,8 @@ public class Graph {
 
     private List<Edge> edges;
     private List<Vertex> vertices;
+    private Vertex vertex;
+    private Edge edge;
     protected Map<Vertex, List<Vertex>> adjacencyList;
     private int nbRed = 0;
 
@@ -21,6 +23,37 @@ public class Graph {
         vertices = new LinkedList<>();
         adjacencyList = new HashMap<>();
     }
+
+    public Graph(int nbVertex, double p, double q) {
+        edges = new LinkedList<>();
+        vertices = new LinkedList<>();
+        adjacencyList = new HashMap<>();
+
+        for (int i = 0; i < nbVertex; i++) {
+            boolean redVertex = new Random().nextDouble() <= p;
+            Color colorVertex = Color.BLUE;
+            if (redVertex)
+                colorVertex = Color.RED;
+            vertex = new Vertex(i, colorVertex);
+            //this.vertices.add(vertex);
+            addVertex(vertex);
+        }
+
+        for (Vertex v : vertices) {
+            for (int i = 1; i < nbVertex; i++) {
+                boolean blueEdge = new Random().nextDouble() <= q;
+                Color colorEdge = Color.RED;
+                if (blueEdge)
+                    colorEdge = Color.BLUE;
+                this.edge = new Edge(v, vertices.get(i), colorEdge);
+                //this.edges.add(edge);
+                addEdge(edge);
+            }
+        }
+    }
+
+
+
 
 
     //// ---- GETTERS ---- ////
@@ -107,7 +140,7 @@ public class Graph {
 
             if (v.getColor() == Color.RED) nbRed--;
 
-            System.out.println("Vertex removed : " + v.getId());
+            System.out.println("Vertex removed : " + v.getId() + " Weight =" + v.getWeight());
 
         } else {
             System.out.println("You can't delete a blue vertex.");
