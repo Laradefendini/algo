@@ -2,7 +2,7 @@ public class Main3 {
 
     public static void main(String[] args) {
         Moyenne moyenne;
-
+/*
         System.out.println("p = 0");
         moyenne = new Moyenne(100, 0, 0);
         System.out.println(moyenne.getAverage());
@@ -175,6 +175,42 @@ public class Main3 {
         System.out.println(moyenne.getAverage());
 
         moyenne = new Moyenne(100, 0.5, 1);
+        System.out.println(moyenne.getAverage());
+*/
+
+
+        System.out.println("p = 0.7");
+        moyenne = new Moyenne(100, 0.7, 0);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.1);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.2);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.3);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.4);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.5);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.6);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.7);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.8);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 0.9);
+        System.out.println(moyenne.getAverage());
+
+        moyenne = new Moyenne(100, 0.7, 1);
         System.out.println(moyenne.getAverage());
 
     }

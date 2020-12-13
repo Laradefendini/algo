@@ -13,7 +13,7 @@ public class Moyenne {
     public double averageFor100Graphs(int nbVertices, double p, double q){
         for(int i = 0 ; i<100 ; i++){
             Graph graph = new Graph(nbVertices, p, q);
-            average += graph.sequenceRouge();
+            average += graph.sequenceRouge2();
         }
 
         return average/100;
