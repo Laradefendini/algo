@@ -102,100 +102,6 @@ public class Main {
         System.out.println("Taille de la séquence rouge :" + graph2.sequenceRouge());
 */
 
-        //
-//        Graph graph2 = new Graph();
-//
-//        Vertex v1b = new Vertex(1, Color.RED);
-//        Vertex v2b = new Vertex(2, Color.RED);
-//        Vertex v3b = new Vertex(3, Color.BLUE);
-//        Vertex v4b = new Vertex(4, Color.RED);
-//        Vertex v5b = new Vertex(5, Color.RED);
-//        Vertex v6b = new Vertex(6, Color.BLUE);
-//        Vertex v7b = new Vertex(7, Color.BLUE);
-//        Vertex v8b = new Vertex(8, Color.RED);
-//
-//        graph2.addVertex(v1b);
-//        graph2.addVertex(v2b);
-//        graph2.addVertex(v3b);
-//        graph2.addVertex(v4b);
-//        graph2.addVertex(v5b);
-//        graph2.addVertex(v6b);
-//        graph2.addVertex(v7b);
-//        graph2.addVertex(v8b);
-//
-//        Edge e1b = new Edge(v1b, v2b, Color.RED);
-//        Edge e2b = new Edge(v2b, v3b, Color.RED);
-//        Edge e3b = new Edge(v3b, v4b, Color.BLUE);
-//        Edge e4b = new Edge(v4b, v5b, Color.BLUE);
-//        Edge e5b = new Edge(v5b, v6b, Color.RED);
-//        Edge e6b = new Edge(v7b, v6b, Color.BLUE);
-//        Edge e7b = new Edge(v7b, v8b, Color.BLUE);
-//
-//        graph2.addEdge(e1b);
-//        graph2.addEdge(e2b);
-//        graph2.addEdge(e3b);
-//        graph2.addEdge(e4b);
-//        graph2.addEdge(e5b);
-//        graph2.addEdge(e6b);
-//        graph2.addEdge(e7b);
-//
-//        System.out.println("Taille de la séquence rouge :" + graph2.sequenceRouge());
-
-        Graph graph2 = new Graph();
-
-        Vertex v1b = new Vertex(1, Color.BLUE);
-        Vertex v2b = new Vertex(2, Color.RED);
-        Vertex v3b = new Vertex(3, Color.RED);
-        Vertex v4b = new Vertex(4, Color.BLUE);
-        Vertex v5b = new Vertex(5, Color.BLUE);
-        Vertex v6b = new Vertex(6, Color.RED);
-        Vertex v7b = new Vertex(7, Color.BLUE);
-        Vertex v8b = new Vertex(8, Color.RED);
-
-        graph2.addVertex(v1b);
-        graph2.addVertex(v2b);
-        graph2.addVertex(v3b);
-        graph2.addVertex(v4b);
-        graph2.addVertex(v5b);
-        graph2.addVertex(v6b);
-        graph2.addVertex(v7b);
-        graph2.addVertex(v8b);
-
-        Edge e1b = new Edge(v1b, v2b, Color.BLUE);
-        Edge e2b = new Edge(v2b, v1b, Color.RED);
-        Edge e3b = new Edge(v2b, v3b, Color.BLUE);
-        Edge e4b = new Edge(v4b, v3b, Color.RED);
-        Edge e5b = new Edge(v4b, v5b, Color.BLUE);
-        Edge e6b = new Edge(v3b, v5b, Color.BLUE);
-        Edge e7b = new Edge(v5b, v3b, Color.BLUE);
-        Edge e8b = new Edge(v4b, v8b, Color.RED);
-        Edge e9b = new Edge(v8b, v5b, Color.RED);
-        Edge e10b = new Edge(v8b, v7b, Color.BLUE);
-        Edge e11b = new Edge(v3b, v7b, Color.RED);
-        Edge e12b = new Edge(v2b, v7b, Color.BLUE);
-        Edge e13b = new Edge(v6b, v7b, Color.RED);
-        Edge e14b = new Edge(v1b, v6b, Color.BLUE);
-
-
-        graph2.addEdge(e1b);
-        graph2.addEdge(e2b);
-        graph2.addEdge(e3b);
-        graph2.addEdge(e4b);
-        graph2.addEdge(e5b);
-        graph2.addEdge(e6b);
-        graph2.addEdge(e7b);
-        graph2.addEdge(e8b);
-        graph2.addEdge(e9b);
-        graph2.addEdge(e10b);
-        graph2.addEdge(e11b);
-        graph2.addEdge(e12b);
-        graph2.addEdge(e13b);
-        graph2.addEdge(e14b);
-
-
-        System.out.println("Taille de la séquence rouge :" + graph2.sequenceRouge());
-
-
 
         /*
         for (Vertex v : graph.getVertices()) {
@@ -226,5 +132,5 @@ public class Main {
         System.out.println("nb red :" + graph.getNbRed());*/
 
 
-        }
     }
+}

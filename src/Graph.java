@@ -83,10 +83,10 @@ public class Graph {
 
     public void addEdge(Edge edge) {
 
-            edges.add(edge);
+        edges.add(edge);
 
-            // On ajoute la vertex d'arrivée dans les adjacents de la vertex de depart
-            adjacencyList.get(edge.getOrigin()).add(edge.getDestination());
+        // On ajoute la vertex d'arrivée dans les adjacents de la vertex de depart
+        adjacencyList.get(edge.getOrigin()).add(edge.getDestination());
 
     }
 
