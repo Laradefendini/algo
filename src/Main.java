@@ -2,7 +2,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Graph graph = new Graph(1000, 0.2, 1);
+        Graph graph = new Graph(100, 0.4, 0.4);
 
 /*
         for(Vertex v : graph.getVertices()){
