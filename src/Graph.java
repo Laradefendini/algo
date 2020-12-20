@@ -20,20 +20,29 @@ public class Graph {
     private int remainingWeight0 = 0;
 
 
+    //// ---- CONSTRUCTORS ---- ////
+
+
     public Graph() {
         edges = new LinkedList<>();
         vertices = new LinkedList<>();
         adjacencyList = new HashMap<>();
     }
 
-    public Graph(int nbVertex, double p, double q) {
+    /**
+     * Constructor for QUESTION 5
+     * @param nbVertices the number of vertices in the graph. In the case of question 5, it will always be 100.
+     * @param p probability for a vertex to be red
+     * @param q probability for an edge to be blue
+     */
+    public Graph(int nbVertices, double p, double q) {
 
 
         edges = new LinkedList<>();
         vertices = new LinkedList<>();
         adjacencyList = new HashMap<>();
 
-        for (int i = 0; i < nbVertex; i++) {
+        for (int i = 0; i < nbVertices; i++) {
             boolean redVertex = new Random().nextDouble() <= p;
             Color colorVertex = Color.BLUE;
             if (redVertex)
@@ -43,7 +52,7 @@ public class Graph {
         }
 
         for (Vertex v : vertices) {
-            for (int i = 0; i < nbVertex; i++) {
+            for (int i = 0; i < nbVertices; i++) {
                 if (!v.equals(vertices.get(i))) {
                     boolean blueEdge = new Random().nextDouble() <= q;
                     Color colorEdge = Color.RED;
@@ -89,7 +98,7 @@ public class Graph {
 
         edges.add(edge);
 
-        // On ajoute la vertex d'arrivée dans les adjacents de la vertex de depart
+        // We add the destination vertex in the adjacency list of the origin vertex
         adjacencyList.get(edge.getOrigin()).add(edge.getDestination());
 
     }
@@ -102,7 +111,12 @@ public class Graph {
 
     /// ---- SUPPRESSION VERTEX ---- ////
 
-    public void removeVertex(Vertex v) {
+    /**
+     * Useful method for first algorithm in QUESTION 4.
+     * It removes a vertex and makes all the necessary adaptations.
+     * @param v the vertex we want to remove
+     */
+    private void removeVertex(Vertex v) {
 
         if (v.getColor() == Color.RED) { // On ne peut supprimer que les rouges
 
@@ -146,7 +160,11 @@ public class Graph {
 
     }
 
-    public void removeVertex2(Vertex v) {
+    /**
+     * Useful method for second algorithm in QUESTION 4.
+     * @param v the vertex we want to remove
+     */
+    private void removeVertex2(Vertex v) {
 
         if (v.getColor() == Color.RED) { // On ne peut supprimer que les rouges
 
@@ -190,19 +208,15 @@ public class Graph {
 
     }
 
-    private void changeDestinationColor(Edge e) {
-        if (e.changeDestinationColor()) {
-            if (e.getDestination().getColor() == Color.BLUE) {
-                nbRed--;
-            } else {
-                nbRed++;
-            }
-        }
-    }
+
 
 
     //// ---- CALCUL POIDS ---- ////
 
+    /**
+     * Useful method for first algorithm in QUESTION 4.
+     * It attributes all the weights to the vertices at the beginning of the "SequenceRouge1" program
+     */
     public void attributeAllWeights() {
         Iterator<Vertex> i = vertices.iterator();
         while (i.hasNext()) {
@@ -213,6 +227,10 @@ public class Graph {
         }
     }
 
+    /**
+     * Useful method for second algorithm in QUESTION 4.
+     * It attributes all the weights to the vertices at the beginning of the "SequenceRouge1" program
+     */
     public void attributeAllWeights2() {
         Iterator<Vertex> i = vertices.iterator();
         while (i.hasNext()) {
@@ -267,10 +285,10 @@ public class Graph {
                 } else if (hasOnlyBlueInEdge(vertex) && hasOnlyRedOutEdge(vertex)) {
                     vertex.setWeight(4);
                     remainingWeight4++;
-                } else if (hasOnlyRedOutEdge(vertex) && !hasBlueOutEdge(vertex)) {
+                } else if (hasOnlyRedOutEdge(vertex)) {
                     vertex.setWeight(3);
                     remainingWeight3++;
-                } else if (hasOnlyRedOutEdge(vertex)) {
+                } else if (hasRedOutEdge(vertex)) {
                     vertex.setWeight(2);
                     remainingWeight2++;
                 } else {
@@ -344,22 +362,22 @@ public class Graph {
                         removeVertex2(vertex);
                         break;
                     }
-                }else if (remainingWeight7 != 0) {
+                } else if (remainingWeight7 != 0) {
                     if (vertex.getWeight() == 7) {
                         removeVertex2(vertex);
                         break;
                     }
-                }else if (remainingWeight6 != 0) {
+                } else if (remainingWeight6 != 0) {
                     if (vertex.getWeight() == 6) {
                         removeVertex2(vertex);
                         break;
                     }
-                }else if (remainingWeight5 != 0) {
+                } else if (remainingWeight5 != 0) {
                     if (vertex.getWeight() == 5) {
                         removeVertex2(vertex);
                         break;
                     }
-                }else if (remainingWeight4 != 0) {
+                } else if (remainingWeight4 != 0) {
                     if (vertex.getWeight() == 4) {
                         removeVertex2(vertex);
                         break;
@@ -432,7 +450,21 @@ public class Graph {
     }
 
 
-    //// ---- METHODES UTILITAIRES ---- ////
+    //// ---- USEFUL TOOL METHODS ---- ////
+
+    /**
+     * To change the color of the destination vertex of the edge e
+     * @param e the edge we want to change the destination color
+     */
+    private void changeDestinationColor(Edge e) {
+        if (e.changeDestinationColor()) {
+            if (e.getDestination().getColor() == Color.BLUE) {
+                nbRed--;
+            } else {
+                nbRed++;
+            }
+        }
+    }
 
 
     public boolean hasOutEdge(Vertex vertex) {
@@ -513,7 +545,10 @@ public class Graph {
             if (edge.getOrigin() == vertex && !edge.isRed())
                 return false;
         }
-        return true;
+        if (hasRedOutEdge(vertex)) {
+            return true;
+        }
+        return false;
     }
 
 
