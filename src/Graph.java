@@ -112,7 +112,7 @@ public class Graph {
     /// ---- SUPPRESSION VERTEX ---- ////
 
     /**
-     * Useful method for first algorithm in QUESTION 4.
+     * Useful method for the first algorithm in QUESTION 6.
      * It removes a vertex and makes all the necessary adaptations.
      * @param v the vertex we want to remove
      */
@@ -161,7 +161,7 @@ public class Graph {
     }
 
     /**
-     * Useful method for second algorithm in QUESTION 4.
+     * Useful method for the second algorithm in QUESTION 6.
      * @param v the vertex we want to remove
      */
     private void removeVertex2(Vertex v) {
@@ -214,7 +214,7 @@ public class Graph {
     //// ---- CALCUL POIDS ---- ////
 
     /**
-     * Useful method for first algorithm in QUESTION 4.
+     * Useful method for the first algorithm in QUESTION 6.
      * It attributes all the weights to the vertices at the beginning of the "SequenceRouge1" program
      */
     public void attributeAllWeights() {
@@ -228,8 +228,8 @@ public class Graph {
     }
 
     /**
-     * Useful method for second algorithm in QUESTION 4.
-     * It attributes all the weights to the vertices at the beginning of the "SequenceRouge1" program
+     * Useful method for the second algorithm in QUESTION 6.
+     * It attributes all the weights to the vertices at the beginning of the "SequenceRouge2" program
      */
     public void attributeAllWeights2() {
         Iterator<Vertex> i = vertices.iterator();
@@ -241,6 +241,11 @@ public class Graph {
         }
     }
 
+    /**
+     * Useful method for the first algorithm in QUESTION 6.
+     * It attributes a weight to a vertex.
+     * @param vertex the vertex to which we want to assign a weight
+     */
     public void attributeWeight(Vertex vertex) {
 
         if (vertex.isRed() && !hasOutEdge(vertex)) {
@@ -264,6 +269,11 @@ public class Graph {
         }
     }
 
+    /**
+     * Useful method for the second algorithm in QUESTION 6.
+     * It attributes a weight to a vertex.
+     * @param vertex the vertex to which we want to assign a weight
+     */
     public void attributeWeight2(Vertex vertex) {
         if (vertex.isRed()) {
             if (!hasOutEdge(vertex)) {
@@ -302,7 +312,11 @@ public class Graph {
         }
     }
 
-
+    /**
+     * Useful for both algorithms in QUESTION 6.
+     * Method to decrease the count of the weight associated to the vertex we are going to change
+     * @param vertex the vertex whose weight we are going to change
+     */
     public void decreaseWeight(Vertex vertex) {
         switch (vertex.getWeight()) {
             case 9:
@@ -341,6 +355,59 @@ public class Graph {
 
     //// ---- SEQUENCE ROUGE ---- ////
 
+    /**
+     * First "Sequence Rouge" algorithm for QUESTION 6.
+     * @return the size of the "Sequence Rouge"
+     */
+    public int sequenceRouge() {
+        int initialSize = vertices.size();
+
+        attributeAllWeights();
+
+        while (nbRed > 0) {
+
+            Iterator<Vertex> i = vertices.iterator();
+            while (i.hasNext()) {
+                Vertex vertex = i.next();
+
+                if (remainingWeight5 != 0) {
+                    if (vertex.getWeight() == 5) {
+                        removeVertex(vertex);
+                        break;
+                    }
+                } else if (remainingWeight4 != 0) {
+                    if (vertex.getWeight() == 4) {
+                        removeVertex(vertex);
+                        break;
+                    }
+                } else if (remainingWeight3 != 0) {
+                    if (vertex.getWeight() == 3) {
+                        removeVertex(vertex);
+                        break;
+                    }
+                } else if (remainingWeight2 != 0) {
+                    if (vertex.getWeight() == 2) {
+                        removeVertex(vertex);
+                        break;
+                    }
+                } else if (remainingWeight1 != 0) {
+                    if (vertex.getWeight() == 1) {
+                        removeVertex(vertex);
+                        break;
+                    }
+                } else if (remainingWeight0 == vertices.size()) {
+                    System.out.println("ok");
+                }
+            }
+        }
+        return initialSize - vertices.size();
+    }
+
+
+    /**
+     * Second "Sequence Rouge" algorithm for QUESTION 6.
+     * @return the size of the "Sequence Rouge"
+     */
     public int sequenceRouge2() {
         int initialSize = vertices.size();
 
@@ -405,49 +472,6 @@ public class Graph {
         return initialSize - vertices.size();
     }
 
-    public int sequenceRouge() {
-        int initialSize = vertices.size();
-
-        attributeAllWeights();
-
-        while (nbRed > 0) {
-
-            Iterator<Vertex> i = vertices.iterator();
-            while (i.hasNext()) {
-                Vertex vertex = i.next();
-
-                if (remainingWeight5 != 0) {
-                    if (vertex.getWeight() == 5) {
-                        removeVertex(vertex);
-                        break;
-                    }
-                } else if (remainingWeight4 != 0) {
-                    if (vertex.getWeight() == 4) {
-                        removeVertex(vertex);
-                        break;
-                    }
-                } else if (remainingWeight3 != 0) {
-                    if (vertex.getWeight() == 3) {
-                        removeVertex(vertex);
-                        break;
-                    }
-                } else if (remainingWeight2 != 0) {
-                    if (vertex.getWeight() == 2) {
-                        removeVertex(vertex);
-                        break;
-                    }
-                } else if (remainingWeight1 != 0) {
-                    if (vertex.getWeight() == 1) {
-                        removeVertex(vertex);
-                        break;
-                    }
-                } else if (remainingWeight0 == vertices.size()) {
-                    System.out.println("ok");
-                }
-            }
-        }
-        return initialSize - vertices.size();
-    }
 
 
     //// ---- USEFUL TOOL METHODS ---- ////
@@ -466,7 +490,10 @@ public class Graph {
         }
     }
 
-
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the origin of (at least) an edge
+     */
     public boolean hasOutEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex)
@@ -475,6 +502,10 @@ public class Graph {
         return false;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the destination of (at least) an edge
+     */
     public boolean hasInEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getDestination() == vertex)
@@ -483,6 +514,10 @@ public class Graph {
         return false;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the origin of (at least) a blue edge
+     */
     public boolean hasBlueOutEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex && !edge.isRed())
@@ -491,6 +526,10 @@ public class Graph {
         return false;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the origin of (at least) a blue edge whose destination is also blue
+     */
     public boolean hasBtoB(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex && !edge.isRed() && !edge.getDestination().isRed())
@@ -499,6 +538,10 @@ public class Graph {
         return false;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the origin of (at least) a blue edge whose destination is red
+     */
     public boolean hasBtoR(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex && !edge.isRed() && edge.getDestination().isRed())
@@ -507,6 +550,10 @@ public class Graph {
         return false;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the origin of (at least) a red edge whose destination is red
+     */
     public boolean hasRtoR(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex && edge.isRed() && edge.getDestination().isRed())
@@ -515,7 +562,10 @@ public class Graph {
         return false;
     }
 
-
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the origin of (at least) a red edge
+     */
     public boolean hasRedOutEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex && edge.isRed())
@@ -524,6 +574,10 @@ public class Graph {
         return false;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex is the destination of (at least) a blue edge
+     */
     public boolean hasBlueInEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getDestination() == vertex && !edge.isRed())
@@ -532,6 +586,10 @@ public class Graph {
         return false;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex has only blue edges coming in (it is the destination of exclusively blue edges)
+     */
     public boolean hasOnlyBlueInEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getDestination() == vertex && edge.isRed())
@@ -540,6 +598,10 @@ public class Graph {
         return true;
     }
 
+    /**
+     * @param vertex the vertex we want to know about
+     * @return true if the vertex has only red edges going out (it is the origin of exclusively red edges)
+     */
     public boolean hasOnlyRedOutEdge(Vertex vertex) {
         for (Edge edge : edges) {
             if (edge.getOrigin() == vertex && !edge.isRed())
